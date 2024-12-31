@@ -110,7 +110,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
     navigate("/dashboard/enrolled-courses")
     dispatch(resetCart())
   } catch (error) {
-    ("PAYMENT VERIFY ERROR............", error)
+  
     toast.error("Could Not Verify Payment.")
   }
   toast.dismiss(toastId)

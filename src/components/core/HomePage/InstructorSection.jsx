@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import CTAButton from "../../../components/core/HomePage/Button";
 import { FaArrowRight } from "react-icons/fa";
 import Instructor from "../../../assets/Images/Instructor.png";
@@ -41,4 +41,4 @@ const InstructorSection = () => {
   )
 }
 
-export default InstructorSection
+export default memo(InstructorSection)

@@ -1,19 +1,24 @@
 // Icons Import
+
+import { Suspense, lazy } from "react"
 import { FaArrowRight } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
 // Image and Video Import
 import Banner from "../assets/Images/banner.mp4"
 // Component Imports
-import Footer from "../components/Common/Footer"
-import ReviewSlider from "../components/Common/ReviewSlider"
+
 import CTAButton from "../components/core/HomePage/Button"
 import CodeBlocks from "../components/core/HomePage/CodeBlocks"
-import ExploreMore from "../components/core/HomePage/ExploreMore"
 import HighlightText from "../components/core/HomePage/HighlightText"
-import InstructorSection from "../components/core/HomePage/InstructorSection"
-import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection"
-import TimelineSection from "../components/core/HomePage/Timeline"
+
+
+const Footer = lazy(() => import("../components/Common/Footer"))
+const ReviewSlider = lazy(() => import("../components/Common/ReviewSlider"))
+const TimelineSection = lazy(() => import("../components/core/HomePage/Timeline"))
+const LearningLanguageSection = lazy(() => import("../components/core/HomePage/LearningLanguageSection"))
+const InstructorSection = lazy(() => import("../components/core/HomePage/InstructorSection"))
+const ExploreMore = lazy(() => import("../components/core/HomePage/ExploreMore"))
 
 function Home() {
   return (
@@ -126,7 +131,13 @@ function Home() {
         </div>
 
         {/* Explore Section */}
+        <Suspense
+            fallback={
+              <div className="mt-10 text-center text-white">Loading...</div>
+            }
+          >
         <ExploreMore />
+        </Suspense>
       </div>
 
       {/* Section 2 */}
@@ -169,27 +180,57 @@ function Home() {
           </div>
 
           {/* Timeline Section - Section 2 */}
-          <TimelineSection />
+          <Suspense
+            fallback={
+              <div className="mt-10 text-center text-white">Loading...</div>
+            }
+          >
+            <TimelineSection />
+          </Suspense>
 
           {/* Learning Language Section - Section 3 */}
-          <LearningLanguageSection />
+          <Suspense
+            fallback={
+              <div className="mt-10 text-center text-white">Loading...</div>
+            }
+          >
+            <LearningLanguageSection />
+          </Suspense>
         </div>
       </div>
 
       {/* Section 3 */}
       <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
         {/* Become a instructor section */}
-        <InstructorSection />
+        <Suspense
+          fallback={
+            <div className="mt-10 text-center text-white">Loading...</div>
+          }
+        >
+          <InstructorSection />
+        </Suspense>
 
         {/* Reviws from Other Learner */}
-        <h1 className="text-center text-4xl font-semibold mt-8">
+        <h1 className="mt-8 text-center text-4xl font-semibold">
           Reviews from other learners
         </h1>
-        <ReviewSlider />
+        <Suspense
+          fallback={
+            <div className="mt-10 text-center text-white">Loading...</div>
+          }
+        >
+          <ReviewSlider />
+        </Suspense>
       </div>
 
       {/* Footer */}
-      <Footer />
+      <Suspense
+        fallback={
+          <div className="mt-10 text-center text-white">Loading...</div>
+        }
+      >
+        <Footer />
+      </Suspense>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { memo, useEffect, useState } from "react"
 import ReactStars from "react-rating-stars-component"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -33,7 +33,7 @@ function ReviewSlider() {
     })()
   }, [])
 
-  // console.log(reviews)
+  console.log(reviews)
 
   return (
     <div className="text-white">
@@ -104,4 +104,4 @@ function ReviewSlider() {
   )
 }
 
-export default ReviewSlider
+export default memo(ReviewSlider)

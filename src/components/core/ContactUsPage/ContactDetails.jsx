@@ -15,7 +15,7 @@ const contactDetails = [
     heading: "Visit us",
     description: "Come and say hello at our office HQ.",
     details:
-      "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016",
+      "Sham Nager 1st Block 1st Cross, Rammurthy nagar, Phagwara-144401",
   },
   {
     icon: "IoCall",

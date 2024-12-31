@@ -1,58 +1,66 @@
-import React, { useEffect, Suspense, lazy } from "react";
-import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import { getUserDetails } from "./services/operations/profileAPI";
-import { ACCOUNT_TYPE } from "./utils/constants";
+import React, { Suspense, lazy, useEffect } from "react"
 
-const Navbar = lazy(() => import("./components/Common/Navbar"));
-const OpenRoute = lazy(() => import("./components/core/Auth/OpenRoute"));
-const PrivateRoute = lazy(() => import("./components/core/Auth/PrivateRoute"));
-const AddCourse = lazy(() => import("./components/core/Dashboard/AddCourse"));
-const Cart = lazy(() => import("./components/core/Dashboard/Cart"));
-const EditCourse = lazy(() => import("./components/core/Dashboard/EditCourse"));
+import "./App.css"
+import { useDispatch, useSelector } from "react-redux"
+import { Route, Routes, useNavigate } from "react-router-dom"
+
+import { getUserDetails } from "./services/operations/profileAPI"
+import { ACCOUNT_TYPE } from "./utils/constants"
+
+const Navbar = lazy(() => import("./components/Common/Navbar"))
+const OpenRoute = lazy(() => import("./components/core/Auth/OpenRoute"))
+const PrivateRoute = lazy(() => import("./components/core/Auth/PrivateRoute"))
+const AddCourse = lazy(() => import("./components/core/Dashboard/AddCourse"))
+const Cart = lazy(() => import("./components/core/Dashboard/Cart"))
+const EditCourse = lazy(() => import("./components/core/Dashboard/EditCourse"))
 const EnrolledCourses = lazy(() =>
   import("./components/core/Dashboard/EnrolledCourses")
-);
-const Instructor = lazy(() => import("./components/core/Dashboard/Instructor"));
-const MyCourses = lazy(() => import("./components/core/Dashboard/MyCourses"));
-const MyProfile = lazy(() => import("./components/core/Dashboard/MyProfile"));
-const Settings = lazy(() => import("./components/core/Dashboard/Settings"));
+)
+const Instructor = lazy(() => import("./components/core/Dashboard/Instructor"))
+const MyCourses = lazy(() => import("./components/core/Dashboard/MyCourses"))
+const MyProfile = lazy(() => import("./components/core/Dashboard/MyProfile"))
+const Settings = lazy(() => import("./components/core/Dashboard/Settings"))
 const VideoDetails = lazy(() =>
   import("./components/core/ViewCourse/VideoDetails")
-);
+)
 
-const About = lazy(() => import("./pages/About"));
-const Catalog = lazy(() => import("./pages/Catalog"));
-const Contact = lazy(() => import("./pages/Contact"));
-const CourseDetails = lazy(() => import("./pages/CourseDetails"));
-const Dashboard = lazy(() => import("./pages/Dashboard"));
-const Error = lazy(() => import("./pages/Error"));
-const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
-const Home = lazy(() => import("./pages/Home"));
-const Login = lazy(() => import("./pages/Login"));
-const Signup = lazy(() => import("./pages/Signup"));
-const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
-const VerifyEmail = lazy(() => import("./pages/VerifyEmail"));
-const ViewCourse = lazy(() => import("./pages/ViewCourse"));
+const About = lazy(() => import("./pages/About"))
+const Catalog = lazy(() => import("./pages/Catalog"))
+const Contact = lazy(() => import("./pages/Contact"))
+const CourseDetails = lazy(() => import("./pages/CourseDetails"))
+const Dashboard = lazy(() => import("./pages/Dashboard"))
+const Error = lazy(() => import("./pages/Error"))
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"))
+const Home = lazy(() => import("./pages/Home"))
+const Login = lazy(() => import("./pages/Login"))
+const Signup = lazy(() => import("./pages/Signup"))
+const UpdatePassword = lazy(() => import("./pages/UpdatePassword"))
+const VerifyEmail = lazy(() => import("./pages/VerifyEmail"))
+const ViewCourse = lazy(() => import("./pages/ViewCourse"))
 
 function App() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { user } = useSelector((state) => state.profile);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { user } = useSelector((state) => state.profile)
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      const token = JSON.parse(localStorage.getItem("token"));
-      dispatch(getUserDetails(token, navigate));
+      const token = JSON.parse(localStorage.getItem("token"))
+      dispatch(getUserDetails(token, navigate))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   return (
-    <Suspense fallback={<div className="text-white text-center mt-10">Loading...</div>}>
-      <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
-        <Navbar />
+    <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
+      <Navbar />
+      <Suspense
+        fallback={
+          <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+            <div className="spinner"></div>
+          </div>
+        }
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -156,9 +164,9 @@ function App() {
           {/* 404 Page */}
           <Route path="*" element={<Error />} />
         </Routes>
-      </div>
-    </Suspense>
-  );
+      </Suspense>
+    </div>
+  )
 }
 
-export default App;
+export default App
